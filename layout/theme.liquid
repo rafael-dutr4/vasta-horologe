@@ -5,21 +5,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="{{ page_description | escape }}">
-    
+
     <link rel="canonical" href="{{ canonical_url }}">
-    
+
     <title>{{ page_title }}</title>
 
     {{ content_for_header }}
-    
+
     <!-- Faça aqui suas chamadas CSS -->
-    
+    {% style %}
+      {{ settings.theme_font | font_face }}
+      :root {
+        --primary-color: {{ settings.primary_color }};
+        --secondary-color: {{ settings.secondary_color }};
+        --text-color: {{ settings.text_color }};
+        --text-color-contrast: {{ settings.text_color_contrast }};
+        --theme-font-family: {{ settings.theme_font.family }};
+        --theme-font-style: {{ settings.theme_font.style }};
+        --theme-font-weight: {{ settings.theme_font.weight }};
+      }
+    {% endstyle %}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
     {{ content_for_layout }}
-    
+
     <!-- Faça aqui suas chamadas JS -->
-    
   </body>
 </html>

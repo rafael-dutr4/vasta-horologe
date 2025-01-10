@@ -1,1 +1,49 @@
-[{"name":"theme_info","theme_name":"Basic Theme","theme_version":"1.0.0","theme_author":"Vasta","theme_documentation_url":"https:\/\/vastaweb.com","theme_support_url":"https:\/\/vastaweb.com"}]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Basic Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Vasta",
+    "theme_documentation_url": "https://vastaweb.com",
+    "theme_support_url": "https://vastaweb.com"
+  },
+  {
+    "name": "Global Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Theme Global Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "theme_font",
+        "label": "Theme Font",
+        "default": "dm_sans_n4"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#252525"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#252525"
+      },
+      {
+        "type": "color",
+        "id": "text_color_contrast",
+        "label": "Text Color Constrast",
+        "default": "#FFFFFF"
+      }
+    ]
+  }
+]
