@@ -1,0 +1,116 @@
+.collections {
+  padding: 1rem;
+  position: relative;
+  height: fit-content;
+}
+
+.carousel-container {
+  position: relative;
+  overflow-x: scroll;
+  width: 100%;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-cards {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-card {
+  display: block;
+  height: 25rem;
+  position: relative;
+}
+
+.collection-img {
+  height: inherit;
+  width: inherit;
+  border-radius: 13px;
+  position: relative;
+}
+
+.collection-title {
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  bottom: 20px;
+  color: var(--text-color-contrast);
+  z-index: 2;
+}
+
+.carousel-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180.05deg,
+    rgba(33, 33, 33, 0.0945) 16.36%,
+    rgba(0, 0, 0, 0.504) 83.6%
+  );
+  border-radius: 13px;
+  z-index: 1;
+}
+
+.carousel-control {
+  display: flex;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border: 2px solid var(--text-color-contrast);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(5px);
+  z-index: 3;
+  top: 50%;
+}
+
+.control-next-collection {
+  right: 25px;
+}
+
+.control-previous-collection {
+  left: 25px;
+}
+
+.carousel-control svg {
+  opacity: 1;
+  margin: auto;
+  z-index: 4;
+}
+
+@media screen and (min-width: 768px) {
+  .collection-title h4 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .collections {
+    padding: 1rem 6rem;
+  }
+
+  .carousel-card {
+    height: 20rem;
+  }
+  .carousel-control {
+    top: 45%;
+  }
+
+  .control-next-collection {
+    right: 130px;
+  }
+
+  .control-previous-collection {
+    left: 130px;
+  }
+}

@@ -1,0 +1,14 @@
+<a class="carousel-card" href="{{ card_url }}">
+  <div class="carousel-overlay"></div>
+  <img
+    class="collection-img"
+    width="{{ card_img.width }}"
+    height="{{ card_img.height }}"
+    src="{{ card_img | image_url  }}"
+  >
+  <div class="collection-title">
+    <h4>
+      {{ card_title }}
+    </h4>
+  </div>
+</a>
