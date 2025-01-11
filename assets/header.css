@@ -36,7 +36,7 @@
   position: absolute;
   right: 0;
   top: -5px;
-  background-color: var(--gren-cta);
+  background-color: var(--color-green-1);
   border-radius: 50%;
   width: 11px;
   height: 11px;
@@ -132,7 +132,8 @@
 .navbar-mobile {
   padding-top: 10px;
   background-color: var(--gray-light-1);
-  position: absolute;
+  position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 0;

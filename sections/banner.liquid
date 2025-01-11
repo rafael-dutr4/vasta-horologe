@@ -1,0 +1,111 @@
+{{ 'banner.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_mobile %}
+  {% style %}
+    .banner {
+      background-image: url('{{ section.settings.image_mobile | image_url }}');
+    }
+  {% endstyle %}
+{% else %}
+  {% style %}
+    .banner {
+      background-image: url("{{ 'banner-mobile.png' | asset_img_url: 'master' }}");
+    }
+  {% endstyle %}
+{% endif %}
+
+{% if section.settings.image_desktop != blank %}
+  {% style %}
+    @media screen and (min-width: 768px) {
+      .banner {
+        background-image: url('{{ section.settings.image_desktop | image_url }}');
+      }
+    }
+  {% endstyle %}
+{% else %}
+  {% style %}
+    @media screen and (min-width: 768px) {
+      .banner {
+        background-image: url("{{ 'banner-desktop.png' | asset_img_url: 'master' }}");
+      }
+    }
+  {% endstyle %}
+{% endif %}
+
+<div class="content">
+  <div class="content-top">
+    <p class="body-text-3">{{ section.settings.top_text }}</p>
+    <div class="content-top__stars">
+      {% for i in (1..section.settings.stars_quantity) %}
+        {{ 'star-icon.svg' | inline_asset_content }}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="content-center">
+    <h2>{{ section.settings.center_text }}</h2>
+  </div>
+  <div class="content-bottom">
+    <p class="body-text-3">
+      {{ section.settings.bottom_text }}
+    </p>
+  </div>
+  <a href="{{ section.settings.btn_url }}" class="cta-btn">{{ section.settings.btn_text }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "Banner",
+  "tag": "section",
+  "class": "banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Banner"
+    },
+    {
+      "type": "text",
+      "id": "top_text",
+      "label": "Top Text",
+      "default": "With 1600+ 5-star reviews"
+    },
+    {
+      "type": "range",
+      "id": "stars_quantity",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Amount of stars",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "center_text",
+      "label": "Center Text",
+      "default": "Lorem ipsum dolor sit amet consectetur"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom Text",
+      "default": "Lorem ipsum dolor sit amet consectetur. Elit elementum rhoncus"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "View More"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    }
+  ]
+}
+{% endschema %}

@@ -32,3 +32,48 @@ a {
   color: var(--text-color);
   text-decoration: none;
 }
+
+h2 {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.body-text-3 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .body-text-3 {
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 32px;
+    line-height: 45px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .body-text-3 {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 45px;
+  }
+}
+
+.cta-btn {
+  border-radius: 110px;
+  background-color: var(--color-green-1);
+  color: var(--text-color-contrast);
+  padding: 16px 36px;
+  font-size: 18px;
+  line-height: 20px;
+  border: none;
+}
