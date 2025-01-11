@@ -1,7 +1,12 @@
+body,
+input,
+button {
+  font-family: var(--theme-font-family);
+}
+
 body {
   color: var(--text-color);
   margin: 0;
-  font-family: var(--theme-font-family);
   font-style: var(--theme-font-style);
   font-weight: var(--theme-font-weight);
   font-size: 14px;
@@ -9,4 +14,21 @@ body {
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .hidden-mobile {
+    display: none !important ;
+  }
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
 }
