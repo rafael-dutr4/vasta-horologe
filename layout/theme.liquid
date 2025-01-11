@@ -23,6 +23,9 @@
         --theme-font-family: {{ settings.theme_font.family }};
         --theme-font-style: {{ settings.theme_font.style }};
         --theme-font-weight: {{ settings.theme_font.weight }};
+
+        --gren-cta: #00C371;
+        --gray-light-1: #E6E9ED;
       }
     {% endstyle %}
 
@@ -30,8 +33,12 @@
   </head>
 
   <body>
-    {{ content_for_layout }}
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
 
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
     <!-- Faça aqui suas chamadas JS -->
   </body>
 </html>

@@ -1,0 +1,7 @@
+<ul class="menu">
+  {% for link in section.settings.navigation_menu.links %}
+    <li class="menu-item">
+      <a class="menu-item__link" href="{{ link.url }}">{{ link.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

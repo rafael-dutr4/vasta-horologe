@@ -1,0 +1,75 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<div class="header-top">
+  <div class="menu-container hidden-desktop">
+    <button aria-controls="navbar-mobile" class="menu-btn toggle-mobile-menu">
+      {{ 'menu-icon.svg' | inline_asset_content }}
+      <div>MENU</div>
+    </button>
+
+    <!-- Mobile navigation menu -->
+
+    <nav class="navbar-container navbar-mobile hidden-desktop" id="navbar-mobile">
+      <div class="navbar-mobile-header">
+        <div class="logo-container">
+          {% render 'logo' %}
+        </div>
+        <button aria-controls="navbar-mobile" class="navbar-mobile-close-button toggle-mobile-menu">
+          {{ 'close-icon.svg' | inline_asset_content }}
+        </button>
+      </div>
+      {% render 'menu-list' %}
+    </nav>
+    <!-- -- -->
+  </div>
+  <div class="logo-container">
+    {% render 'logo' %}
+  </div>
+  {% render 'search-form', extra-classes: 'hidden-mobile' %}
+  <div class="cart-container">
+    <a class="cart-link" href="{{ routes.cart_url }}">
+      <div class="cart-icon">
+        {{ 'cart-icon.svg' | inline_asset_content }}
+        {% unless cart.empty? %}
+          <div class="cart-notification">
+            {{ cart.item_count }}
+          </div>
+        {% endunless %}
+      </div>
+      <div>CART</div>
+    </a>
+  </div>
+</div>
+<div class="header-bottom">
+  {% render 'search-form', extra-classes: 'hidden-desktop' %}
+
+  <nav class="navbar-container hidden-mobile">
+    {% render 'menu-list' %}
+  </nav>
+</div>
+
+<script>
+  document.querySelectorAll('.toggle-mobile-menu').forEach((node) => {
+    node.addEventListener('click', (e) => {
+      document.querySelector('.navbar-container').classList.toggle('show');
+      document.querySelector('.navbar-overlay').classList.toggle('show');
+      document.querySelectorAll('.toggle-mobile-menu').forEach((btn) => btn.toggleAttribute('aria-expanded'));
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header",
+  "tag": "header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "navigation_menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}
