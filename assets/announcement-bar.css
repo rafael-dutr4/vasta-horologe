@@ -19,9 +19,14 @@
   gap: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+.announcement-bar .mail-address,
+.announcement-bar .phone-number {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
   .announcement-bar .mail-address,
   .announcement-bar .phone-number {
-    display: none;
+    display: block;
   }
 }
