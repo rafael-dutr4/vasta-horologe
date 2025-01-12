@@ -44,6 +44,7 @@ h2 {
   font-size: 14px;
   line-height: 20px;
 }
+
 .cta-btn {
   border-radius: 110px;
   background-color: var(--color-green-1);
@@ -52,6 +53,7 @@ h2 {
   font-size: 18px;
   line-height: 20px;
   border: none;
+  display: inline-block;
 }
 
 h1 {
@@ -71,6 +73,26 @@ h4 {
   font-size: 12px;
   line-height: 12px;
   text-align: center;
+}
+
+.text-sm {
+  font-size: 12px;
+}
+
+.text-md {
+  font-size: 14px;
+}
+
+.text-lg {
+  font-size: 18px;
+}
+
+.leading-8 {
+  line-height: 2rem;
+}
+
+.light-text {
+  color: var(--text-color-contrast);
 }
 
 @media screen and (min-width: 768px) {

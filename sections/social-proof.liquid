@@ -1,0 +1,143 @@
+{{ 'social-proof.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.bg_img_mobile != blank %}
+  {% style %}
+    .social-proof {
+      background-image: url('{{ section.settings.bg_img_mobile }}');
+    }
+  {% endstyle %}
+{% else %}
+  {% style %}
+    .social-proof {
+      background-image: url('{{ 'social-proof-mobile-banner.png' | asset_img_url: 'master' }}');
+    }
+  {% endstyle %}
+{% endif %}
+
+{% if section.settings.bg_img_desktop != blank %}
+  {% style %}
+    @media screen and (min-width: 1440px) {
+      .social-proof {
+        background-image: url('{{ section.settings.bg_img_desktop }}');
+      }
+    }
+  {% endstyle %}
+{% else %}
+  {% style %}
+    @media screen and (min-width: 1440px) {
+      .social-proof {
+        background-image: url('{{ 'social-proof-desktop-banner.png' | asset_img_url: 'master' }}');
+      }
+    }
+  {% endstyle %}
+{% endif %}
+
+<div class="social-proof__content light-text">
+  <div class="social-proof__content-top">
+    <div class="social-proof__description">
+      <h2>{{ section.settings.title }}</h2>
+      <p class="text-lg leading-8">{{ section.settings.description }}</p>
+    </div>
+    <a class="social-proof__btn cta-btn" href="{{ section.settings.cta_url }}"> {{ section.settings.cta_text }}</a>
+  </div>
+  <div class="social-proof__reviews">
+    {% for block in section.blocks %}
+      <div class="review__container">
+        <div class="review__persona">
+          <img
+            width="{{ block.settings.persona_img.width }}"
+            height="{{ block.settings.persona_img.width }}"
+            src="{{ block.settings.persona_img | image_url }}"
+          >
+          <div class="review__details">
+            <div class="persona__name">{{ block.settings.persona_name }}</div>
+            <div class="review__rating">
+              {% for i in (1..block.settings.stars) %}
+                {{ 'star-icon.svg' | inline_asset_content }}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <p class="review__comment">{{ block.settings.comment }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "tag": "section",
+  "class": "social-proof",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_img_desktop",
+      "label": "Background Image For Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img_mobile",
+      "label": "Background Image For Mobile"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Cherised Favorites"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Explore the Harmony of Exceptional Quality and Customer Praise"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "View More"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "persona_img",
+          "label": "Persona Image"
+        },
+        {
+          "type": "text",
+          "id": "persona_name",
+          "label": "Persona Name",
+          "default": "John R."
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Review Stars",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "comment",
+          "label": "Review Comment",
+          "default": "Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
