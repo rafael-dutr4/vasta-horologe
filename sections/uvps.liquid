@@ -1,0 +1,71 @@
+{{ 'uvps.css' | asset_url | stylesheet_tag }}
+
+<h1 class="uvps-title">{{ section.settings.title }}</h1>
+
+<div class="uvps-cards">
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks -%}
+      {% render 'uvp-card', icon: block.settings.uvp_icon, uvp_text: block.settings.uvp_text %}
+    {% endfor %}
+  {% else %}
+    {% assign uvps_examples = 'shippment,review,eco,offers' | split: ',' %}
+    {% for uvp in uvps_examples %}
+      {% render 'uvp-card', uvp_icon: uvp, uvp_text: 'Lorem ipsum dolor sit amet consectetur' %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "UVPs",
+  "tag": "section",
+  "class": "uvps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Shop Smarter, Shop With Vasta"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "uvps_cards",
+      "name": "UVP",
+      "settings": [
+        {
+          "type": "text",
+          "id": "uvp_text",
+          "label": "UVP Text",
+          "default": "Lorem ipsum dolor sit amet consectetur"
+        },
+        {
+          "type": "select",
+          "id": "uvp_icon",
+          "label": "UVP Icon",
+          "options": [
+            {
+              "value": "shipping",
+              "label": "Shipping"
+            },
+            {
+              "value": "review",
+              "label": "Customer Reviews"
+            },
+            {
+              "value": "eco",
+              "label": "Eco Friendly"
+            },
+            {
+              "value": "offers",
+              "label": "Special Offers"
+            }
+          ],
+          "default": "shipping",
+          "info": "Choose the options that your UVP fits in."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

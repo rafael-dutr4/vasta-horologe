@@ -1,0 +1,17 @@
+{%- liquid
+  case uvp_icon
+    when 'review'
+      assign icon_file_name = 'review-icon.svg'
+    when 'eco'
+      assign icon_file_name = 'eco-icon.svg'
+    when 'offers'
+      assign icon_file_name = 'offers-icon.svg'
+    else
+      assign icon_file_name = 'shippment-icon.svg'
+  endcase
+%}
+
+<div class="uvp-card">
+  <div class="uvp-icon">{{ icon_file_name | inline_asset_content }}</div>
+  <div class="uvp-text body-text-3">{{ uvp_text }}</div>
+</div>

@@ -44,30 +44,6 @@ h2 {
   font-size: 14px;
   line-height: 20px;
 }
-
-@media screen and (min-width: 768px) {
-  .body-text-3 {
-    font-weight: 500;
-  }
-
-  h2 {
-    font-size: 32px;
-    line-height: 45px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .body-text-3 {
-    font-weight: 400;
-    font-size: 16px;
-  }
-
-  h2 {
-    font-weight: 700;
-    font-size: 45px;
-  }
-}
-
 .cta-btn {
   border-radius: 110px;
   background-color: var(--color-green-1);
@@ -88,4 +64,54 @@ h4 {
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
+}
+
+.body-text-4 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .body-text-3 {
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 32px;
+    line-height: 45px;
+  }
+
+  .body-text-4 {
+    font-size: 14px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 36px;
+    line-height: 43px;
+  }
+
+  .body-text-3 {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 45px;
+  }
+
+  .body-text-4 {
+    font-size: 18px;
+    line-height: 18px;
+  }
 }
