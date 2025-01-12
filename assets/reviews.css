@@ -1,0 +1,121 @@
+.sec-reviews {
+  padding: 2rem 1rem;
+}
+
+.sec-reviews .introduction {
+  margin: 2rem;
+}
+
+.sec-reviews .subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.sec-reviews .subtitle h2 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.sec-reviews .reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: start;
+  gap: 1rem;
+}
+
+.sec-reviews .review {
+  width: 100%;
+  height: 100%;
+  border: 0.73px solid var(--gray-soft, #e8e8e8);
+  border-radius: 6px 6px 6px 6px;
+}
+
+.sec-reviews .review__image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 6px 6px 0 0;
+}
+
+.sec-reviews .review__details {
+  display: grid;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 13px;
+  letter-spacing: 0.035em;
+}
+
+.sec-reviews .review__author {
+  font-weight: 700;
+}
+
+.sec-reviews .review__rating {
+  margin-top: 10px;
+}
+
+.divider {
+  width: 100%;
+  border: 1px solid var(--gray-soft, #e8e8e8);
+  justify-self: center;
+}
+
+.review__product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 10px;
+}
+
+.review__product-image {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.reviews-paginator {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--gray-hard);
+  margin-top: 2rem;
+}
+
+.reviews-paginator .curr-page {
+  color: var(--primary-color, black);
+}
+
+@media screen and (min-width: 425px) {
+  .sec-reviews .review__image {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sec-reviews .review__image {
+    height: 480px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .sec-reviews .review {
+    width: 215px;
+  }
+
+  .sec-reviews .review__image {
+    height: 300px;
+  }
+
+  .sec-reviews .reviews {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
