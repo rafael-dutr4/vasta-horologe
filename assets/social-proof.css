@@ -6,6 +6,11 @@
   position: relative;
 }
 
+.review-details {
+  height: fit-content;
+  margin: auto 0;
+}
+
 @media screen and (max-width: 1439px) {
   .social-proof::before {
     content: "";
