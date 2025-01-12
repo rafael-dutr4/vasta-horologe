@@ -1,0 +1,57 @@
+<h1>{{ section.settings.title }}</h1>
+
+{% render 'products-showcase', blocks: section.blocks %}
+
+{% schema %}
+{
+  "name": "Products Showcase",
+  "class": "showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Best Selling Products"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Product Name",
+          "default": "Product Name"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "number",
+          "id": "reviews_amount",
+          "label": "Amount of Reviews",
+          "default": 800
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
