@@ -1,0 +1,165 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+<div class="footer__container container light-text">
+  <div class="footer__section">
+    <div>
+      <img
+        class="logo"
+        width="302"
+        height="90"
+        src="{{ 'vasta-logo-light.png' | asset_img_url: 'master' }}"
+      >
+    </div>
+
+    <div class="email-cta">
+      <p class="body-text-3">Enter Your Email To Receive 15% Coupon Immediately</p>
+      <form class="email-cta__form">
+        <input class="email-cta__input" type="text" name="q" placeholder="Enter Email Address">
+        <button class="email-cta__form-button">Give Me 15% OFF</button>
+      </form>
+    </div>
+
+    <div class="popular-collections">
+      <h4>Popular Collections</h4>
+      <div class="collections-cards">
+        <a class="carousel-card">
+          <div class="carousel-overlay"></div>
+          <img
+            class="collection-img"
+            width="564"
+            height="846"
+            src="{{ 'collection-placeholder.png' | asset_img_url: 'master' }}"
+          >
+          <div class="collection-title">
+            <h5>Lorem Ipsum</h5>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__contact-info">
+      <h4>Get In Contact</h4>
+      <div class="footer__contact-options caption">
+        <div>
+          {{ 'phone-icon.svg' | inline_asset_content }}
+          <span>(715) 600-1564</span>
+        </div>
+        <div>
+          {{ 'mail-icon.svg' | inline_asset_content }}
+          <span>info@clenchfitness.com</span>
+        </div>
+        <div>
+          {{ 'address-icon.svg' | inline_asset_content }}
+          <span>New Richmond, WI 54017</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__section">
+    <div class="footer__navigation">
+      <nav class="footer__navigation-section">
+        <div class="footer__navigation-section-title body-title-4">
+          Information
+          {{ 'arrow-icon.svg' | inline_asset_content }}
+        </div>
+        <ul class="footer__navigation-links show caption">
+          <li>
+            <a>About Us</a>
+          </li>
+          <li>
+            <a>Blog</a>
+          </li>
+          <li>
+            <a>Lorem Ipsum</a>
+          </li>
+          <li>
+            <a>Lorem Ipsum</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="vertical-divider"></div>
+      <nav class="footer__navigation-section">
+        <div class="footer__navigation-section-title body-title-4">
+          Customer Care
+          {{ 'arrow-icon.svg' | inline_asset_content }}
+        </div>
+        <ul class="footer__navigation-links caption">
+          <li>
+            <a>Contact Us</a>
+          </li>
+          <li>
+            <a>Terms of service</a>
+          </li>
+          <li>
+            <a>Privacy Policy</a>
+          </li>
+          <li>
+            <a>Accessibility</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__rights-section">
+      <div class="payment-methods">
+        <img
+          class="payment-card"
+          width="60"
+          height="35"
+          src="{{ 'visa-logo.png' | asset_img_url: 'master' }}"
+        >
+        <img
+          class="payment-card"
+          width="60"
+          height="35"
+          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
+        >
+        <img
+          class="payment-card"
+          width="60"
+          height="35"
+          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
+        >
+        <img
+          class="payment-card"
+          width="60"
+          height="35"
+          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
+        >
+        <img
+          class="payment-card"
+          width="60"
+          height="35"
+          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
+        >
+      </div>
+
+      <div class="copyright caption">
+        <p>Copyright © 2023 Clench Fitness. All Right Reserved.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.footer__navigation-section-title').forEach((node) => {
+    node.addEventListener('click', (e) => {
+      if (node.nextElementSibling.clientHeight) {
+        node.nextElementSibling.style.height = '0';
+        node.nextElementSibling.style.visibility = 'none';
+      } else {
+        node.nextElementSibling.style.visibility = 'visible';
+        node.nextElementSibling.style.height = node.nextElementSibling.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "sec-footer",
+  "tag": "footer",
+  "settings": []
+}
+{% endschema %}
