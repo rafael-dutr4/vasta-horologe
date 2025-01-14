@@ -1,67 +1,79 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 
-<div class="header-top">
-  <div class="menu-container hidden-desktop">
-    <button aria-controls="navbar-mobile" class="menu-btn toggle-mobile-menu">
-      {{ 'menu-icon.svg' | inline_asset_content }}
-      <div>MENU</div>
-    </button>
-
-    <!-- Mobile navigation menu -->
-
-    <nav class="navbar-container navbar-mobile hidden-desktop" id="navbar-mobile">
-      <div class="navbar-mobile-header">
-        <div class="logo-container">
-          {% render 'logo' %}
+<div class="header__container container">
+  <div class="header__row">
+    <div class="hidden-desktop">
+      <button aria-controls="headerNavbar" class="header__btn header__nav-toggle">
+        <div class="header__icon">
+          {{ 'menu-icon.svg' | inline_asset_content }}
         </div>
-        <button aria-controls="navbar-mobile" class="navbar-mobile-close-button toggle-mobile-menu">
-          {{ 'close-icon.svg' | inline_asset_content }}
-        </button>
-      </div>
-      {% render 'menu-list' %}
-    </nav>
-    <!-- -- -->
-  </div>
-  <div class="logo-container">
-    {% render 'logo' %}
-  </div>
-  {% render 'search-form', extra-classes: 'hidden-mobile' %}
-  <div class="cart-container">
-    <a class="cart-link" href="{{ routes.cart_url }}">
-      <div class="cart-icon">
-        {{ 'cart-icon.svg' | inline_asset_content }}
-        {% unless cart.empty? %}
-          <div class="cart-notification">
+        <span>MENU</span>
+      </button>
+    </div>
+    <div>
+      {% render 'logo' %}
+    </div>
+    <div class="hidden-mobile">
+      {% render 'header-search', extra-classes: 'hidden-mobile' %}
+    </div>
+    <div>
+      <a class="header__link" href="{{ routes.cart_url }}">
+        <div class="header__icon">
+          {{ 'cart-icon.svg' | inline_asset_content }}
+          <div class="header__icon-notification">
             {{ cart.item_count }}
           </div>
-        {% endunless %}
-      </div>
-      <div>CART</div>
-    </a>
+        </div>
+        <span>CART</span>
+      </a>
+    </div>
   </div>
-</div>
-<div class="header-bottom">
-  {% render 'search-form', extra-classes: 'hidden-desktop' %}
 
-  <nav class="navbar-container hidden-mobile">
-    {% render 'menu-list' %}
-  </nav>
+  <div class="header__row hidden-desktop">
+    {% render 'header-search' %}
+  </div>
+
+  <div class="header__row header__row-navbar">
+    <nav id="headerNavbar" class="header__navbar">
+      <ul class="header__navbar-list">
+        {% for link in section.settings.navigation_menu.links %}
+          <li class="header__navbar-item">
+            <a class="header__navbar-link" href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
 </div>
 
 <script>
-  document.querySelectorAll('.toggle-mobile-menu').forEach((node) => {
-    node.addEventListener('click', (e) => {
-      document.querySelector('.navbar-container').classList.toggle('show');
-      document.querySelector('.navbar-overlay').classList.toggle('show');
-      document.querySelectorAll('.toggle-mobile-menu').forEach((btn) => btn.toggleAttribute('aria-expanded'));
-    });
+  const navbar = document.querySelector('.header__navbar');
+  const body = document.querySelector('body');
+  document.querySelector('.header__nav-toggle').addEventListener('click', (e) => {
+    body.classList.toggle('overflow-hidden');
+    if (navbar.clientHeight) {
+      navbar.style.height = '0';
+      navbar.style.visibility = 'none';
+    } else {
+      navbar.style.visibility = 'visible';
+      navbar.style.height = window.innerHeight + 'px';
+    }
+  });
+
+  /* Avoid scroll lock in the theme editor */
+  const mql = window.matchMedia('(min-width: 1024px)');
+  mql.addEventListener('change', function (e) {
+    if (e.matches) {
+      navbar.style = '';
+      body.classList.remove('overflow-hidden');
+    }
   });
 </script>
 
 {% schema %}
 {
   "name": "Header",
-  "class": "header",
+  "class": "sec-header",
   "tag": "header",
   "settings": [
     {

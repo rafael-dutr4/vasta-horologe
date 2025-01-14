@@ -1,0 +1,7 @@
+<form class="header__search-form {{extra-classes}}" action="{{routes.search_url}}">
+  <input class="header__search-input" type="text" name="q" placeholder="Search: Lorem Ipsum">
+  <button class="header__search-btn-submit clickable" type="submit">
+    <span>Search</span>
+    {{- 'search-icon.svg' | inline_asset_content -}}
+  </button>
+</form>
