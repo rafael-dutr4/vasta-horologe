@@ -16,23 +16,12 @@
     {% style %}
       {{ settings.theme_font | font_face }}
       :root {
-        --primary-color: {{ settings.primary_color }};
-        --secondary-color: {{ settings.secondary_color }};
-        --text-color: {{ settings.text_color }};
-        --text-color-contrast: {{ settings.text_color_contrast }};
-        --theme-font-family: {{ settings.theme_font.family }};
-        --theme-font-style: {{ settings.theme_font.style }};
-        --theme-font-weight: {{ settings.theme_font.weight }};
-
-        --color-green-1: #00AC4F;
-        --gray-light-1: #E6E9ED;
-        --color-dark-0: #17171a;
-        --gray-soft: #E8E8E8;
-        --gray-hard:rgb(150, 150, 150);
+        --font-family: {{ settings.theme_font.family }};
       }
     {% endstyle %}
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'utilities.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
