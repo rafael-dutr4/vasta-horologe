@@ -1,25 +1,27 @@
 {{ 'uvps.css' | asset_url | stylesheet_tag }}
 
-<h1 class="uvps-title">{{ section.settings.title }}</h1>
+<div class="uvps__container container">
+  <h2>{{ section.settings.title }}</h2>
 
-<div class="uvps-cards">
-  {% if section.blocks.size > 0 %}
-    {% for block in section.blocks -%}
-      {% render 'uvp-card', icon: block.settings.uvp_icon, uvp_text: block.settings.uvp_text %}
-    {% endfor %}
-  {% else %}
-    {% assign uvps_examples = 'shippment,review,eco,offers' | split: ',' %}
-    {% for uvp in uvps_examples %}
-      {% render 'uvp-card', uvp_icon: uvp, uvp_text: 'Lorem ipsum dolor sit amet consectetur' %}
-    {% endfor %}
-  {% endif %}
+  <div class="uvps__cards">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks -%}
+        {% render 'uvp-card', icon: block.settings.uvp_icon, uvp_text: block.settings.uvp_text %}
+      {% endfor %}
+    {% else %}
+      {% assign uvps_examples = 'shippment,review,eco,offers' | split: ',' %}
+      {% for uvp in uvps_examples %}
+        {% render 'uvp-card', uvp_icon: uvp, uvp_text: 'Lorem ipsum dolor sit amet consectetur' %}
+      {% endfor %}
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "UVPs",
   "tag": "section",
-  "class": "uvps",
+  "class": "sec-uvps",
   "settings": [
     {
       "type": "text",
@@ -62,7 +64,7 @@
             }
           ],
           "default": "shipping",
-          "info": "Choose the options that your UVP fits in."
+          "info": "Choose the options that your UVP fits in"
         }
       ]
     }

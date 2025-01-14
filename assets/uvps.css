@@ -1,30 +1,37 @@
-.uvps {
-  padding: 1rem;
+.sec-uvps {
+  padding: 20px;
+  background-color: var(--gray-light);
 }
 
-.uvps-title {
-  margin: 0 4rem;
+.uvps__container {
+  display: grid;
+  gap: 18.7px;
 }
 
-.uvps-cards {
-  padding: 2rem 0.8rem;
+.uvps__cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 20px;
 }
 
-.uvp-icon {
-  margin: 10px auto;
-  width: 50px;
-  height: 50px;
+.uvps__card-icon {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
-.uvp-card {
+.uvp__card {
   position: relative;
+  display: grid;
+  justify-content: center;
+  padding: 11.69px 0px;
+  gap: 10px;
 }
 
-/* Get all uvps cards, except  */
-.uvp-card:nth-child(2n):before {
+.uvp__card:nth-child(2n):before {
   content: "";
   background-color: rgba(0, 0, 0, 0.1);
   height: 100%;
@@ -36,17 +43,22 @@
 }
 
 @media screen and (min-width: 768px) {
-  .uvps-cards {
+  .sec-uvps {
+    padding: 45px;
+  }
+
+  .uvps__cards {
     grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
   }
 
   .uvp-icon {
-    width: 55px;
-    height: 55px;
+    width: 88px;
+    height: 88px;
   }
 
   /* Select all UVPs cards, except the first one of each row */
-  .uvp-card:not(:nth-child(5n)):not(:first-child):before {
+  .uvp__card:not(:nth-child(5n)):not(:first-child):before {
     content: "";
     background-color: rgba(0, 0, 0, 0.1);
     height: 100%;
@@ -58,9 +70,18 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .uvp-icon {
+@media screen and (min-width: 1440px) {
+  .uvps__container {
+    display: grid;
+    gap: 30px;
+  }
+
+  .uvps__card-icon {
     width: 74px;
     height: 74px;
+  }
+
+  .uvps__cards {
+    gap: 44px;
   }
 }
