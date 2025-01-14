@@ -1,62 +1,79 @@
 {{ 'banner.css' | asset_url | stylesheet_tag }}
 
-{% if section.settings.image_mobile %}
-  {% style %}
-    .banner {
-      background-image: url('{{ section.settings.image_mobile | image_url }}');
-    }
-  {% endstyle %}
-{% else %}
-  {% style %}
-    .banner {
-      background-image: url("{{ 'banner-mobile.png' | asset_img_url: 'master' }}");
-    }
-  {% endstyle %}
-{% endif %}
+<div class="banner__container container light-color">
+  <picture>
+    {% if section.settings.image_desktop != blank %}
+      {% assign desktop_img_height = section.settings.image_desktop.width %}
+      <source
+        media="(min-width: 768px)"
+        srcset="{{ section.settings.image_desktop | image_url: width: section.settings.image_desktop.width }}"
+      >
+    {% else %}
+      {% assign desktop_img_height = 506 %}
+      <source
+        media="(min-width: 768px)"
+        srcset="{{ 'banner-desktop.png' | asset_img_url: 'master' }}"
+      >
+    {% endif %}
+    {% if section.settings.image_mobile != blank %}
+      {% assign mobile_img_height = section.settings.image_mobile.width %}
+      {{
+        section.settings.image_mobile
+        | image_url: width: section.settings.image_mobile
+        | image_tag: class: 'banner__image'
+      }}
+    {% else %}
+      {% assign mobile_img_height = 1053 %}
+      <img
+        width="750"
+        height="1053"
+        class="banner__image"
+        src="{{ 'banner-mobile.png' | asset_img_url: 'master' }}"
+      >
+    {% endif %}
+  </picture>
 
-{% if section.settings.image_desktop != blank %}
   {% style %}
+    .sec-banner,
+    .banner__image  {
+      height: {{ mobile_img_height }}px;
+    }
+
     @media screen and (min-width: 768px) {
-      .banner {
-        background-image: url('{{ section.settings.image_desktop | image_url }}');
+      .sec-banner,
+      .banner__image  {
+        height: {{ desktop_img_height }}px;
       }
     }
   {% endstyle %}
-{% else %}
-  {% style %}
-    @media screen and (min-width: 768px) {
-      .banner {
-        background-image: url("{{ 'banner-desktop.png' | asset_img_url: 'master' }}");
-      }
-    }
-  {% endstyle %}
-{% endif %}
-
-<div class="content">
-  <div class="content-top">
-    <p class="body-text-3">{{ section.settings.top_text }}</p>
-    <div class="content-top__stars">
-      {% for i in (1..section.settings.stars_quantity) %}
-        {{ 'star-icon.svg' | inline_asset_content }}
-      {% endfor %}
+  <div class="banner__content">
+    <div class="banner__row banner__row--center-mobile">
+      <p class="body-text-3">{{ section.settings.top_text }}</p>
+      <div>
+        {% for i in (1..section.settings.stars_quantity) %}
+          {{ 'star-icon.svg' | inline_asset_content }}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="banner__row">
+      <h2>{{ section.settings.center_text }}</h2>
+    </div>
+    <div class="banner__row">
+      <p class="body-text-4">
+        {{ section.settings.bottom_text }}
+      </p>
+    </div>
+    <div class="banner__row banner__cta-row banner__row--center-mobile">
+      <a href="{{ section.settings.btn_url }}" class="cta-btn">{{ section.settings.btn_text }}</a>
     </div>
   </div>
-  <div class="content-center">
-    <h2>{{ section.settings.center_text }}</h2>
-  </div>
-  <div class="content-bottom">
-    <p class="body-text-3">
-      {{ section.settings.bottom_text }}
-    </p>
-  </div>
-  <a href="{{ section.settings.btn_url }}" class="cta-btn">{{ section.settings.btn_text }}</a>
 </div>
 
 {% schema %}
 {
   "name": "Banner",
   "tag": "section",
-  "class": "banner",
+  "class": "sec-banner",
   "settings": [
     {
       "type": "image_picker",
