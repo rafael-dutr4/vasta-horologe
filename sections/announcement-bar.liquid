@@ -3,51 +3,51 @@
 {% assign mailto = 'mailto:' | append: section.settings.announcement_bar_mail %}
 {% assign phoneto = 'tel:' | append: section.settings.announcement_bar_phone %}
 
-<a href="{{ mailto }}">
-  <div class="mail-container">
-    {{ 'mail-icon.svg' | inline_asset_content }}
-    <div class="mail-address">
-      {{ section.settings.announcement_bar_mail }}
-    </div>
+<div class="announcement-bar__container container light-text">
+  <div class="announcement-bar__col">
+    <a class="announcement-bar__col-link" href="{{ mailto }}">
+      {{ 'mail-icon.svg' | inline_asset_content }}
+      <div class="announcement-bar__col-content">
+        {{ section.settings.announcement_bar_mail }}
+      </div>
+    </a>
   </div>
-</a>
-<div class="text-container">
-  {{ section.settings.announcement_bar_text }}
+  <div class="announcement-bar__col">
+    {{ section.settings.announcement_bar_text }}
+  </div>
+  <div class="announcement-bar__col">
+    <a class="announcement-bar__col-link" href="{{ phoneto }}">
+      {{ 'phone-icon.svg' | inline_asset_content }}
+      <div class="announcement-bar__col-content">
+        {{ section.settings.announcement_bar_phone }}
+      </div>
+    </a>
+  </div>
 </div>
-<a href="{{ phoneto }}">
-  <div class="phone-container">
-    {{ 'phone-icon.svg' | inline_asset_content }}
-    <div class="phone-number">
-      {{ section.settings.announcement_bar_phone }}
-    </div>
-  </div>
-</a>
 
 {% schema %}
 {
   "name": "Announcement Bar",
   "tag": "section",
-  "class": "announcement-bar",
+  "class": "sec-announcement-bar",
   "settings": [
     {
       "type": "text",
       "id": "announcement_bar_text",
       "label": "The Announcement Text",
-      "default": "WE PAY SHIPPING ON ORVERS OVER $X"
+      "default": "WE PAY SHIPPING ON ORDERS OVER $X"
     },
     {
       "type": "text",
       "id": "announcement_bar_mail",
       "label": "The Contact Email",
-      "default": "info@brand.com",
-      "info": "This email will be displayed only in the desktop version of the store"
+      "default": "info@brand.com"
     },
     {
       "type": "text",
       "id": "announcement_bar_phone",
       "label": "The Contact Phone",
-      "default": "+1 (111) 222-3333 ",
-      "info": "This phone number will be displayed only in the desktop version of the store"
+      "default": "+1 (111) 222-3333 "
     }
   ]
 }

@@ -1,32 +1,44 @@
-.announcement-bar {
-  background-color: var(--primary-color);
-  color: var(--text-color-contrast);
-  padding: 0.8rem 0;
+.sec-announcement-bar {
+  background-color: var(--color-dark);
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 8px 20px 8px 20px;
+  height: 30px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 
-.announcement-bar a {
-  text-decoration: none;
-  color: inherit;
+.announcement-bar__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.announcement-bar .phone-container,
-.announcement-bar .mail-container {
+.announcement-bar__col-link {
   align-items: center;
   display: flex;
-  gap: 1rem;
+  gap: 5px;
 }
 
-.announcement-bar .mail-address,
-.announcement-bar .phone-number {
+.announcement-bar__col-content {
   display: none;
 }
 
+@media screen and (min-width: 768px) {
+  .sec-announcement-bar {
+    height: 35px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
-  .announcement-bar .mail-address,
-  .announcement-bar .phone-number {
+  .sec-announcement-bar {
+    font-size: 18px;
+    padding: 10px 135px;
+    height: 50px;
+  }
+
+  .announcement-bar__col-content {
     display: block;
   }
 }
