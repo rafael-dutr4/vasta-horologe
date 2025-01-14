@@ -1,74 +1,105 @@
 {{ 'social-proof.css' | asset_url | stylesheet_tag }}
 
-{% if section.settings.bg_img_mobile != blank %}
-  {% style %}
-    .social-proof {
-      background-image: url('{{ section.settings.bg_img_mobile }}');
-    }
-  {% endstyle %}
-{% else %}
-  {% style %}
-    .social-proof {
-      background-image: url('{{ 'social-proof-mobile-banner.png' | asset_img_url: 'master' }}');
-    }
-  {% endstyle %}
-{% endif %}
+<div class="social-proof__container container light-text">
+  <picture>
+    {% if section.settings.image_desktop != blank %}
+      {% assign desktop_img_height = section.settings.image_desktop.width %}
+      <source
+        media="(min-width: 1440px)"
+        srcset="{{ section.settings.image_desktop | image_url: width: section.settings.image_desktop.width }}"
+      >
+    {% else %}
+      {% assign desktop_img_height = 667 %}
+      <source
+        media="(min-width: 1440px)"
+        srcset="{{ 'default-social-proof-desktop.png' | asset_img_url: 'master' }}"
+      >
+    {% endif %}
+    {% if section.settings.image_tablet != blank %}
+      {% assign tablet_img_height = section.settings.image_tablet.width %}
+      <source
+        media="(min-width: 768px)"
+        srcset="{{ section.settings.image_tablet | image_url: width: section.settings.image_tablet.width }}"
+      >
+    {% else %}
+      {% assign tablet_img_height = 566 %}
+      <source
+        media="(min-width: 768px)"
+        srcset="{{ 'default-social-proof-tablet.png' | asset_img_url: 'master' }}"
+      >
+    {% endif %}
+    {% if section.settings.image_mobile != blank %}
+      {% assign mobile_img_height = section.settings.image_mobile.width %}
+      {{
+        section.settings.image_mobile
+        | image_url: width: section.settings.image_mobile
+        | image_tag: class: 'social-proof__image'
+      }}
+    {% else %}
+      {% assign mobile_img_height = 585 %}
+      <img
+        width="375"
+        height="585"
+        class="social-proof__image"
+        src="{{ 'default-social-proof-mobile.png' | asset_img_url: 'master' }}"
+      >
+    {% endif %}
+  </picture>
 
-{% if section.settings.bg_img_desktop != blank %}
   {% style %}
-    @media screen and (min-width: 1440px) {
-      .social-proof {
-        background-image: url('{{ section.settings.bg_img_desktop }}');
+    .sec-social-proof,
+    .social-proof__image  {
+      height: {{ mobile_img_height }}px;
+    }
+
+
+    @media screen and (min-width: 768px) {
+      .sec-social-proof,
+      .social-proof__image  {
+        height: {{ tablet_img_height }}px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .sec-social-proof,
+      .social-proof__image  {
+        height: {{ desktop_img_height }}px;
       }
     }
   {% endstyle %}
-{% else %}
-  {% style %}
-    @media screen and (min-width: 1440px) {
-      .social-proof {
-        background-image: url('{{ 'social-proof-desktop-banner.png' | asset_img_url: 'master' }}');
-      }
-    }
-  {% endstyle %}
-{% endif %}
-
-<div class="social-proof__content light-text">
-  <div class="social-proof__content-top">
+  <div class="social-proof__row social-proof__content-top">
     <div class="social-proof__description">
       <h2>{{ section.settings.title }}</h2>
       <p class="text-lg leading-8">{{ section.settings.description }}</p>
     </div>
     <a class="social-proof__btn cta-btn" href="{{ section.settings.cta_url }}"> {{ section.settings.cta_text }}</a>
   </div>
-  <div class="social-proof__reviews">
-    {% for block in section.blocks %}
-      <div class="review__container">
-        <div class="review__persona">
+  <div class="social-proof__row social-proof__reviews">
+    {% for block in collection.blocks %}
+      <div class="social-proof__review-container">
+        <div class="social-proof__persona">
           {% if block.settings.persona_img != blank %}
-            <img
-              class="persona-pic"
-              width="{{ block.settings.persona_img.width }}"
-              height="{{ block.settings.persona_img.width }}"
-              src="{{ block.settings.persona_img | image_url }}"
-            >
+            {{ block.settings.persona_img | image_url: width: block.settings.persona_img | image_tag }}
           {% else %}
             <img
-              class="persona-pic"
+              class="social-proof__persona-pic"
               width="170"
               height="138"
               src="{{ 'image-icon.png' | asset_img_url }}"
             >
           {% endif %}
-          <div class="review__details">
-            <div class="persona__name">{{ block.settings.persona_name }}</div>
-            <div class="review__rating">
+          <div class="social-proof__review-details">
+            <div class="social-proof__persona-name">{{ block.settings.persona_name }}</div>
+            <div class="social-proof__review-rating">
               {% for i in (1..block.settings.stars) %}
                 {{ 'star-icon.svg' | inline_asset_content }}
               {% endfor %}
             </div>
           </div>
         </div>
-        <p class="review__comment">{{ block.settings.comment }}</p>
+        <p class="social-proof__review-comment">
+          {{ block.settings.comment }}
+        </p>
       </div>
     {% endfor %}
   </div>
@@ -78,17 +109,22 @@
 {
   "name": "Social Proof",
   "tag": "section",
-  "class": "social-proof",
+  "class": "sec-social-proof",
   "settings": [
     {
       "type": "image_picker",
-      "id": "bg_img_desktop",
-      "label": "Background Image For Desktop"
+      "id": "image_desktop",
+      "label": "Background Image For Desktop View"
     },
     {
       "type": "image_picker",
-      "id": "bg_img_mobile",
-      "label": "Background Image For Mobile"
+      "id": "image_tablet",
+      "label": "Background Image For Tablet View"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background Image For Mobile View"
     },
     {
       "type": "text",

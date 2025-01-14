@@ -1,76 +1,79 @@
-.social-proof {
-  height: 600px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.sec-social-proof {
   position: relative;
 }
 
-.review-details {
-  height: fit-content;
-  margin: auto 0;
+.social-proof__image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  object-fit: cover;
+  height: auto;
 }
 
-@media screen and (max-width: 1439px) {
-  .social-proof::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-      180deg,
-      #000000 24.48%,
-      rgba(0, 0, 0, 0) 70.73%,
-      #000000 103.2%
-    );
-  }
+.social-proof__description {
+  display: grid;
+  gap: 10px;
 }
 
-.social-proof__content {
+.social-proof__row {
   position: absolute;
   box-sizing: border-box;
-  top: 0;
-  left: 0;
   height: 100%;
   width: 100%;
-  gap: 10rem;
-  display: grid;
-  padding: 3rem 1rem;
+  padding: 74px 20px;
+}
+
+.social-proof__content-top {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  top: 0;
+  left: 0;
 }
 
 .social-proof__reviews {
+  top: 275px;
+  left: 0;
   display: flex;
   justify-content: center;
+  height: fit-content;
 }
 
-.review__persona {
+.social-proof__persona-pic {
+  width: 65px;
+  height: 65px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.social-proof__review-container:nth-child(2) {
+  display: none;
+}
+
+.social-proof__review-container {
+  max-width: 314px;
+  display: grid;
+  gap: 20px;
+}
+
+.social-proof__persona {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-.persona-pic {
-  width: 65px;
-  height: 65px;
-  border-radius: 100px;
+.social-proof__review-details {
+  text-align: start;
 }
 
-.review__container {
-  max-width: 300px;
-}
-
-.review__container:nth-child(2) {
-  display: none;
-}
-
-@media screen and (min-width: 700px) {
-  .review__container:nth-child(2) {
+@media screen and (min-width: 768px) {
+  .social-proof__review-container:nth-child(2) {
     display: block;
   }
   .social-proof__content {
-    gap: 5rem;
+    gap: 30px;
   }
 
   .social-proof__reviews {
