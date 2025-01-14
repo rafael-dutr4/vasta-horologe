@@ -1,35 +1,41 @@
 {{ 'collections.css' | asset_url | stylesheet_tag }}
 
-<h1>Shop by Collection</h1>
-<div class="carousel-container">
-  <div class="carousel-cards">
-    {% if section.settings.data_source == 'my_collections' %}
-      {% for collection in collections %}
-        {% render 'card', card_url: collection.url, card_img: collection.featured_image, card_title: collection.title %}
-      {% endfor %}
-    {% else %}
-      {% for block in section.blocks %}
-        {% render 'card',
-          card_url: block.settings.card_url,
-          card_img: block.settings.card_img,
-          card_title: block.settings.card_title
-        %}
-      {% endfor %}
-    {% endif %}
+<div class="collections__container container ">
+  <h2>Shop by Collection</h2>
+  <div class="collections__carousel">
+    <div class="collections__carousel-cards">
+      {% if section.settings.data_source == 'my_collections' %}
+        {% for collection in collections %}
+          {% render 'card',
+            card_url: collection.url,
+            card_img: collection.featured_image,
+            card_title: collection.title
+          %}
+        {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          {% render 'card',
+            card_url: block.settings.card_url,
+            card_img: block.settings.card_img,
+            card_title: block.settings.card_title
+          %}
+        {% endfor %}
+      {% endif %}
+    </div>
   </div>
-</div>
-<div class="carousel-control control-previous-collection">
-  {{ 'arrow-left-icon.svg' | inline_asset_content }}
-</div>
-<div class="carousel-control control-next-collection">
-  {{ 'arrow-right-icon.svg' | inline_asset_content }}
+  <div class="collections__carousel-control collections__carousel-control-prev clickable">
+    {{ 'arrow-left-icon.svg' | inline_asset_content }}
+  </div>
+  <div class="collections__carousel-control collections__carousel-control-next clickable">
+    {{ 'arrow-right-icon.svg' | inline_asset_content }}
+  </div>
 </div>
 
 <script>
-  const cardList = document.querySelector('.carousel-container');
-  const prevButton = document.querySelector('.control-previous-collection');
-  const nextButton = document.querySelector('.control-next-collection');
-  const cardWidth = document.querySelector('.carousel-card').offsetWidth;
+  const cardList = document.querySelector('.collections__carousel');
+  const prevButton = document.querySelector('.collections__carousel-control-prev');
+  const nextButton = document.querySelector('.collections__carousel-control-next');
+  const cardWidth = document.querySelector('.collection__card').offsetWidth;
 
   prevButton.addEventListener('click', () => {
     cardList.scrollLeft -= cardWidth;
@@ -38,13 +44,25 @@
   nextButton.addEventListener('click', () => {
     cardList.scrollLeft += cardWidth;
   });
+
+  function scrollToLeftOnTabletView(matchMedia) {
+    if (matchMedia.matches) {
+      cardList.scrollLeft += cardWidth / 2;
+    }
+  }
+
+  tabletMatch = window.matchMedia('(min-width: 768px)');
+  scrollToLeftOnTabletView(tabletMatch);
+  tabletMatch.addEventListener('change', function (_) {
+    scrollToLeftOnTabletView(tabletMatch);
+  });
 </script>
 
 {% schema %}
 {
   "name": "Collections",
   "tag": "section",
-  "class": "collections",
+  "class": "sec-collections",
   "settings": [
     {
       "type": "radio",

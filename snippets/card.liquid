@@ -1,9 +1,9 @@
-<a class="carousel-card" href="{{ card_url }}">
-  <div class="carousel-overlay"></div>
-  {{ card_img | image_url: width: card_img.width | image_tag: class: 'collection-img' }}
-  <div class="collection-title">
+<a class="collection__card" href="{{ card_url }}">
+  <div class="collection__card-overlay"></div>
+  {{ card_img | image_url: width: card_img.width | image_tag: class: 'collection__card-img' }}
+  <div class="collection__card-title">
     <h4>
-      {{ card_title }}
+      {{- card_title -}}
     </h4>
   </div>
 </a>
