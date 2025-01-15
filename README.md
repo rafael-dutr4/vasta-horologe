@@ -1,4 +1,5 @@
 # Horologe Theme
+
 [![GitHub last commit](https://img.shields.io/github/last-commit/rafael-dutr4/vasta-horologe)](#)
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
@@ -7,6 +8,7 @@
 ![Shopify](https://img.shields.io/badge/shopify-8DB543?style=for-the-badge&logo=Shopify&logoColor=white)
 
 ## Introduction
+
 The Horologe is a Shopify Store Theme developed for a frontend recruitment challenge.
 
 In this challenge, provided by the [Vasta Company](https://www.vasta.me), the challengers need to create a, reponsive and dinamically, homepage of a watch store using a Figma layout.
@@ -16,9 +18,11 @@ My project is hosted on this repository. To see the project on a example store, 
 ## How to Use?
 
 ### Requirements
+
 - [ShopifyCLI](https://shopify.dev/docs/api/shopify-cli#installation)
-  
+
 ### Steps
+
 ```shell
 # Open a terminal
 
