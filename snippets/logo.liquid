@@ -1,3 +1,15 @@
+{% comment %}
+  Renders the company logo
+
+  Accepts:
+  - type: {'light'|nil} If 'light' is passed, render the light version of the logo.
+
+  Usage:
+  {% render 'logo',
+    type: 'light'
+  %}
+{% endcomment %}
+
 <a
   href="{{ routes.root_url }}"
 >

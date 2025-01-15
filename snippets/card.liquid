@@ -1,3 +1,22 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_type: {'mini'|nil} To render a mini or normal size card.
+  - animate: {boolean} If true, pass the scale animation class to the card.
+  - card_url: {string} The card link href.
+  - card_img: {image|nil} The card image. If nil, a placeholder is redered.
+  - card_title: {string} The card title.
+
+  Usage:
+  {% render 'card',
+    card_url: collection.url,
+    card_img: collection.featured_image,
+    card_title: collection.title,
+    animate: section.settings.animate_card
+  %}
+{% endcomment %}
+
 <a
   class="collection__card {% if card_type == 'mini' %}collection__card--mini{% endif %} {% if animate %}scale-img{% endif %}"
   href="{{ card_url }}"

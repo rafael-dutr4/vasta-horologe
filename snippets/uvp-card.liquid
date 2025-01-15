@@ -1,3 +1,17 @@
+{% comment %}
+  Renders a Unique Value Proposion Card
+
+  Accepts:
+  - uvp_icon: {'review'|'eco'|'offers'|'shippment'} The icon name to render.
+  - uvp_text: {string} The UVP description.
+
+  Usage:
+  {% render 'uvp-card',
+    uvp_icon: 'review',
+    uvp_text: 'Lorem Ipsum'
+  %}
+{% endcomment %}
+
 {%- liquid
   case uvp_icon
     when 'review'

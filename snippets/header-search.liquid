@@ -1,4 +1,16 @@
-<form class="header__search-form {{extra-classes}}" action="{{routes.search_url}}">
+{% comment %}
+  Renders the search form in the header
+
+  Accepts:
+  - extra_classes: {string|nil} Form container extra classes.
+
+  Usage:
+  {% render 'header-search',
+    extra_classes: 'hidden-mobile'
+  %}
+{% endcomment %}
+
+<form class="header__search-form {{extra_classes}}" action="{{routes.search_url}}">
   <input class="header__search-input" type="text" name="q" placeholder="{{ section.settings.input_placeholder }}">
   <button class="header__search-btn-submit clickable" type="submit">
     <span>{{ section.settings.btn_text }}</span>
