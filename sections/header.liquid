@@ -10,7 +10,7 @@
         <span>MENU</span>
       </button>
     </div>
-    <div>
+    <div class="header__logo">
       {% render 'logo' %}
     </div>
     <div class="hidden-mobile">
@@ -47,27 +47,30 @@
 </div>
 
 <script>
-  const navbar = document.querySelector('.header__navbar');
-  const body = document.querySelector('body');
-  document.querySelector('.header__nav-toggle').addEventListener('click', (e) => {
-    body.classList.toggle('overflow-hidden');
-    if (navbar.clientHeight) {
-      navbar.style.height = '0';
-      navbar.style.visibility = 'none';
-    } else {
-      navbar.style.visibility = 'visible';
-      navbar.style.height = window.innerHeight + 'px';
-    }
-  });
+  function setupMobileNavbar() {
+    const navbar = document.querySelector('.header__navbar');
+    const body = document.querySelector('body');
+    document.querySelector('.header__nav-toggle').addEventListener('click', (e) => {
+      body.classList.toggle('overflow-hidden');
+      if (navbar.clientHeight) {
+        navbar.style.height = '0';
+        navbar.style.visibility = 'none';
+      } else {
+        navbar.style.visibility = 'visible';
+        navbar.style.height = window.innerHeight + 'px';
+      }
+    });
 
-  /* Avoid scroll lock in the theme editor */
-  const mql = window.matchMedia('(min-width: 1024px)');
-  mql.addEventListener('change', function (e) {
-    if (e.matches) {
-      navbar.style = '';
-      body.classList.remove('overflow-hidden');
-    }
-  });
+    /* Avoid scroll lock in the theme editor */
+    mediaQueries.desktop.addEventListener('change', function (e) {
+      if (mediaQueries.desktop.matches) {
+        navbar.style = '';
+        body.classList.remove('overflow-hidden');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupMobileNavbar);
 </script>
 
 {% schema %}
@@ -81,6 +84,18 @@
       "id": "navigation_menu",
       "label": "Navigation Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "btn_placeholder",
+      "label": "Search Button Placeholder",
+      "default": "Search"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Search Input Placeholder",
+      "default": "Search: Lorem Ipsum"
     }
   ]
 }

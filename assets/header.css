@@ -1,3 +1,8 @@
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
 /* -- HEADER LAYOUT -- */
 .sec-header {
   padding: 16px 20px;
@@ -87,7 +92,6 @@
   }
 
   .header__search-btn-submit {
-    width: 120px;
     font-size: 14px;
   }
 }
@@ -188,6 +192,7 @@
   list-style: none;
   font-weight: 700;
   font-size: 14px;
+  padding: 0;
 }
 
 .header__navbar-link {
@@ -209,14 +214,8 @@
     gap: 1rem;
   }
 
-  .header__navbar-link {
-    color: var(--text-color);
-    text-decoration: none;
-  }
-
   .header__navbar {
     gap: 53px;
-    opacity: 0px;
     display: flex;
     justify-content: center;
   }
@@ -230,7 +229,7 @@
     padding: 15px;
     box-sizing: border-box;
     transition: all ease-in-out 0.3s;
-    border-radius: 3px;
+    border-radius: 35px;
   }
 
   .header__navbar-link:hover {
