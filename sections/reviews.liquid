@@ -1,77 +1,84 @@
 {{ 'reviews.css' | asset_url | stylesheet_tag }}
 
-<div class="introduction">
-  <div class="title">
-    <h1>{{ section.settings.title }}</h1>
-  </div>
+<div class="reviews__container container">
+  <div class="reviews__row">
+    <h2 class="reviews__title">{{ section.settings.title }}</h2>
 
-  <div class="subtitle">
-    <h2>{{ section.settings.subtitle }}</h2>
-    <div class="subtitle__stars">
-      {% for i in (1..section.settings.stars) %}
-        {{ 'star-icon.svg' | inline_asset_content }}
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<div class="reviews">
-  {% for block in section.blocks %}
-    <div class="review">
-      {% if block.settings.image != blank %}
-        {{
-          block.settings.image
-          | image_url: width: block.settings.image.width, height: block.settings.image.height
-          | image_tag: class: 'review__image'
-        }}
-      {% else %}
-        <img
-          class="review__image"
-          width="953"
-          height="1334"
-          src="{{ 'persona-placeholder.png' | asset_img_url: 'master'  }}"
-        >
-      {% endif %}
-      <div class="review__details">
-        <div class="review__author">{{ block.settings.author }}</div>
-        <div class="review__country">{{ block.settings.country }}</div>
-        <div class="review__rating">
-          {% for i in (1..block.settings.rating) %}
-            {{ 'star-icon.svg' | inline_asset_content }}
-          {% endfor %}
-        </div>
-        <div class="review__comment">
-          <p>
-            {{ block.settings.comment }}
-          </p>
-        </div>
-        <div aria-hidden="false" class="divider"></div>
-        <div class="review__product">
-          {% if block.settings.product != blank %}
-            {{
-              block.settings.product.featured_image
-              | image_url:
-                width: block.settings.product.featured_image.width,
-                height: block.settings.product.featured_image.height
-              | image_tag: class: 'review__product-image'
-            }}
-            <div class="review__product-name">{{ block.settings.product.title }}</div>
-          {% else %}
-            <img
-              class="review__product-image"
-              width="1000"
-              height="500"
-              src="{{ 'product-placeholder.png' | asset_img_url: 'master' }}"
-            >
-            <div class="review__product-name">Lorem ipsum dolor sit amet</div>
-          {% endif %}
-        </div>
+    <div class="reviews__subtitle">
+      <h3 class="section-subtitle">{{ section.settings.subtitle }}</h3>
+      <div class="reviews__subtitle-stars">
+        {% for i in (1..section.settings.stars) %}
+          {{ 'star-icon.svg' | inline_asset_content }}
+        {% endfor %}
       </div>
     </div>
-  {% endfor %}
-</div>
+  </div>
 
-<div class="reviews-paginator"><span class="curr-page">1</span> 2 3 … 30 ></div>
+  <div class="reviews__row reviews__row-cards">
+    {% for block in section.blocks %}
+      <div class="reviews__card">
+        {% if block.settings.image != blank %}
+          {{
+            block.settings.image
+            | image_url: width: block.settings.image.width, height: block.settings.image.height
+            | image_tag: class: 'review__image'
+          }}
+        {% else %}
+          <img
+            class="review__image"
+            width="953"
+            height="1334"
+            src="{{ 'persona-placeholder.png' | asset_img_url: 'master'  }}"
+          >
+        {% endif %}
+        <div class="review__details">
+          <div class="review__author">
+            <div class="review__author-name">{{ block.settings.author }}</div>
+            <div class="review__author-country">{{ block.settings.country }}</div>
+          </div>
+          <div class="review__rating">
+            {% for i in (1..block.settings.rating) %}
+              {{ 'star-icon.svg' | inline_asset_content }}
+            {% endfor %}
+          </div>
+          <div class="review__comment">
+            <p>
+              {{ block.settings.comment }}
+            </p>
+          </div>
+          <div aria-hidden="false" class="divider"></div>
+          <div class="review__product">
+            {% if block.settings.product != blank %}
+              {{
+                block.settings.product.featured_image
+                | image_url:
+                  width: block.settings.product.featured_image.width,
+                  height: block.settings.product.featured_image.height
+                | image_tag: class: 'review__product-image'
+              }}
+              <div class="review__product-name">{{ block.settings.product.title }}</div>
+            {% else %}
+              <img
+                class="review__product-image"
+                width="1000"
+                height="500"
+                src="{{ 'product-placeholder.png' | asset_img_url: 'master' }}"
+              >
+              <div class="review__product-name">Lorem ipsum dolor sit amet</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="reviews__paginator">
+    <span class="paginator__curr-page clickable">1</span> <span class="clickable">2</span>
+    <span class="clickable">3</span> <span>…</span>
+    <span class="paginator__last-page clickable">30</span>
+    <span class="paginator__next clickable">{{ 'mini-arrow-right-icon.svg' | inline_asset_content }}</span>
+  </div>
+</div>
 
 {% schema %}
 {
@@ -99,6 +106,13 @@
       "step": 1,
       "label": "Amount of Stars",
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_product_img",
+      "label": "Review Image Hover Effect",
+      "info": "When checked, the review image will scale up on mouse hover",
+      "default": true
     }
   ],
   "blocks": [
