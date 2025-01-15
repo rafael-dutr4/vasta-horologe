@@ -22,6 +22,7 @@
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     {{ 'utilities.css' | asset_url | stylesheet_tag }}
+    {{ 'animations.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
@@ -34,5 +35,6 @@
 
     {% section 'footer' %}
     <!-- Faça aqui suas chamadas JS -->
+    <script src="{{ 'utilities.js' | asset_url }}" defer></script>
   </body>
 </html>

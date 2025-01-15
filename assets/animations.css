@@ -1,0 +1,48 @@
+/* Button Glow */
+@keyframes glowing {
+  0% {
+    background-color: var(--green-color);
+    box-shadow: 0 0 5px var(--green-color);
+  }
+  50% {
+    background-color: var(--green-color-glow);
+    box-shadow: 0 0 20px var(--green-color-glow);
+  }
+  100% {
+    background-color: var(--green-color);
+    box-shadow: 0 0 5px var(--green-color);
+  }
+}
+
+.cta-btn-glow {
+  animation: glowing 1300ms infinite;
+}
+
+.cta-btn-glow:hover {
+  background-color: var(--green-color-glow);
+  box-shadow: 0 0 20px var(--green-color-glow);
+  animation: none;
+}
+/* Button Glow */
+
+/* Image Floating */
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(var(--animation-floating-transform-px));
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-img {
+  animation: floating 4s cubic-bezier(0.42, 0.22, 0.59, 0.85) infinite;
+}
+/* Image Floating */
+
+.scale-img:hover img {
+  transform: scale(1.05);
+}
