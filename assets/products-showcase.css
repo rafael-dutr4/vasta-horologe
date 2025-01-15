@@ -1,19 +1,54 @@
-.showcase {
-  padding: 2rem 1rem;
+.showcase__container {
+  padding: 40px 20px;
+  display: grid;
+  gap: 25px;
 }
 
-.showcase-container {
+.products {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
   column-gap: 1em;
 }
 
-.product-container {
+@media screen and (min-width: 1024px) {
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .showcase__container {
+    padding: 60px 30px;
+  }
+  .products {
+    gap: 35px;
+  }
+}
+
+/* -- PRODUCT CARD -- */
+
+.product__container {
   width: 100%;
   height: 100%;
   box-shadow: 2.4px 2.4px 7.86px 0px #00000033;
   border-radius: 0 0 6px 6px;
+}
+
+@media screen and (min-width: 768px) {
+  .product__container {
+    max-width: 349px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .product__container {
+    max-width: 274px;
+  }
+}
+
+.product__link {
+  width: fit-content;
 }
 
 .product__image {
@@ -22,35 +57,35 @@
   object-fit: contain;
   object-position: center;
   border-radius: 0 0 6px 6px;
-  background-color: #f5f6fa;
+  background-color: var(--gray-soft);
 }
 
-.product-details {
+.product__details {
   padding: 5px;
 }
 
-.product-title {
+.product__title {
   font-size: 14px;
   text-align: left;
 }
 
-.rating-stars {
-  display: flex;
-  align-items: center;
-}
-
-.rating-stars svg {
-  width: 7px;
-  height: 7px;
-}
-
-.product-rating {
+.product__rating {
   display: flex;
   justify-content: start;
   gap: 5px;
 }
 
-.rating-details {
+.product__rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.product__rating-stars svg {
+  width: 7px;
+  height: 7px;
+}
+
+.product__rating-amount {
   font-size: 9px;
   font-weight: 500;
   line-height: 2;
@@ -61,42 +96,37 @@
     height: 380px;
   }
 
-  .product-title {
+  .product__title {
     font-size: 22px;
   }
 
-  .rating-details {
+  .product__rating-amount {
     font-size: 14px;
   }
 
-  .rating-stars svg {
+  .product__rating-stars svg {
     width: 13px;
     height: 13px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .showcase {
-    padding: 2rem 5rem;
-  }
-  .showcase-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .product__image {
     height: 300px;
   }
 
-  .product-title {
+  .product__title {
     font-size: 18px;
   }
 
-  .rating-details {
+  .product__rating-amount {
     font-size: 12px;
   }
 
-  .rating-stars svg {
+  .product__rating-stars svg {
     width: 10px;
     height: 10px;
   }
 }
+
+/* -- PRODUCT CARD -- */

@@ -1,9 +1,9 @@
 {{ 'products-showcase.css' | asset_url | stylesheet_tag }}
 
-<div class="showcase-container">
+<div class="products">
   {% for block in blocks %}
-    <a href="{{block.settings.link}}">
-      <div class="product-container">
+    <a class="product__link">
+      <div class="product__container {% if section.settings.animate_product_img %}scale-img{% endif %}">
         {% if block.settings.image != blank %}
           {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: class: 'product__image' }}
         {% else %}
@@ -14,15 +14,15 @@
             src="{{ 'product-placeholder.png' | asset_img_url: 'master' }}"
           >
         {% endif %}
-        <div class="product-details">
-          <div class="product-title">{{ block.settings.name }}</div>
-          <div class="product-rating">
-            <div class="rating-stars">
+        <div class="product__details">
+          <div class="product__title">{{ block.settings.name }}</div>
+          <div class="product__rating">
+            <div class="product__rating-stars">
               {% for i in (1..block.settings.stars) %}
                 {{ 'star-icon.svg' | inline_asset_content }}
               {% endfor %}
             </div>
-            <div class="rating-details">
+            <div class="product__rating-amount">
               ({{ block.settings.stars }}.0 Of {{ block.settings.reviews_amount }} Reviews)
             </div>
           </div>

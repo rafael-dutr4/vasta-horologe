@@ -1,17 +1,25 @@
-<h1>{{ section.settings.title }}</h1>
-
-{% render 'products-showcase', blocks: section.blocks %}
+<div class="showcase__container container">
+  <h2>{{ section.settings.title }}</h2>
+  {% render 'products-showcase', blocks: section.blocks %}
+</div>
 
 {% schema %}
 {
   "name": "Products Showcase",
-  "class": "showcase",
+  "class": "sec-showcase",
   "settings": [
     {
       "type": "text",
       "id": "title",
       "label": "Section Title",
       "default": "Best Selling Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_product_img",
+      "label": "Product Image Hover Effect",
+      "info": "When checked, the review image will scale up on mouse hover",
+      "default": true
     }
   ],
   "blocks": [
