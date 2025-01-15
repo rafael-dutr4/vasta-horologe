@@ -28,10 +28,6 @@
     gap: 8px;
     justify-content: start;
   }
-
-  .banner__container {
-    padding-top: 35%;
-  }
 }
 /* -- BANNER LAYOUT -- */
 
@@ -39,7 +35,7 @@
 .banner__content {
   position: absolute;
   z-index: 1;
-  top: 8%;
+  top: 5%;
   left: 0;
   text-align: center;
   display: grid;
@@ -59,7 +55,7 @@
   .banner__content {
     padding: 0;
     z-index: 1;
-    top: 7%;
+    top: 25%;
     left: 8%;
     width: 52%;
     text-align: left;
@@ -67,12 +63,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .banner__content {
-    top: 15%;
-  }
-}
-
-@media screen and (min-width: 1440px) {
   .banner__content {
     top: 25%;
   }

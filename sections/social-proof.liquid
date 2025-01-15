@@ -28,19 +28,25 @@
         srcset="{{ 'default-social-proof-tablet.png' | asset_img_url: 'master' }}"
       >
     {% endif %}
+    {% liquid
+      assign img_classes = 'social-proof__image '
+      if section.settings.animate_image
+        assign img_classes = img_classes | append: 'float-img'
+      endif
+    %}
     {% if section.settings.image_mobile != blank %}
       {% assign mobile_img_height = section.settings.image_mobile.width %}
       {{
         section.settings.image_mobile
         | image_url: width: section.settings.image_mobile
-        | image_tag: class: 'social-proof__image'
+        | image_tag: class: img_classes
       }}
     {% else %}
       {% assign mobile_img_height = 585 %}
       <img
         width="375"
         height="585"
-        class="social-proof__image"
+        class="{{img_classes}}"
         src="{{ 'default-social-proof-mobile.png' | asset_img_url: 'master' }}"
       >
     {% endif %}
@@ -72,20 +78,29 @@
       <h2>{{ section.settings.title }}</h2>
       <p class="text-lg leading-8">{{ section.settings.description }}</p>
     </div>
-    <a class="social-proof__btn cta-btn" href="{{ section.settings.cta_url }}"> {{ section.settings.cta_text }}</a>
+    <a
+      class="social-proof__btn cta-btn {%if section.settings.cta_btn_glow%}cta-btn-glow{% endif %}"
+      href="{{ section.settings.cta_url }}"
+    >
+      {{ section.settings.cta_text -}}
+    </a>
   </div>
   <div class="social-proof__row social-proof__reviews">
-    {% for block in collection.blocks %}
+    {% for block in section.blocks %}
       <div class="social-proof__review-container">
         <div class="social-proof__persona">
           {% if block.settings.persona_img != blank %}
-            {{ block.settings.persona_img | image_url: width: block.settings.persona_img | image_tag }}
+            {{
+              block.settings.persona_img
+              | image_url: width: block.settings.persona_img.width
+              | image_tag: class: 'social-proof__persona-pic'
+            }}
           {% else %}
             <img
               class="social-proof__persona-pic"
               width="170"
               height="138"
-              src="{{ 'image-icon.png' | asset_img_url }}"
+              src="{{ 'social-proof-persona-sample.jpeg' | asset_img_url }}"
             >
           {% endif %}
           <div class="social-proof__review-details">
@@ -127,6 +142,12 @@
       "label": "Background Image For Mobile View"
     },
     {
+      "type": "checkbox",
+      "id": "animate_image",
+      "label": "Animate Background Image",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "title",
       "label": "Section Title",
@@ -148,6 +169,12 @@
       "type": "url",
       "id": "cta_url",
       "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_btn_glow",
+      "label": "Button Glow Effect",
+      "default": true
     }
   ],
   "blocks": [

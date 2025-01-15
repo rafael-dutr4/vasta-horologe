@@ -1,7 +1,7 @@
 {{ 'collections.css' | asset_url | stylesheet_tag }}
 
 <div class="collections__container container ">
-  <h2>Shop by Collection</h2>
+  <h2>{{ section.settings.title }}</h2>
   <div class="collections__carousel">
     <div class="collections__carousel-cards">
       {% if section.settings.data_source == 'my_collections' %}
@@ -9,7 +9,8 @@
           {% render 'card',
             card_url: collection.url,
             card_img: collection.featured_image,
-            card_title: collection.title
+            card_title: collection.title,
+            animate: section.settings.animate_card
           %}
         {% endfor %}
       {% else %}
@@ -17,7 +18,8 @@
           {% render 'card',
             card_url: block.settings.card_url,
             card_img: block.settings.card_img,
-            card_title: block.settings.card_title
+            card_title: block.settings.card_title,
+            animate: section.settings.animate_card
           %}
         {% endfor %}
       {% endif %}
@@ -32,30 +34,34 @@
 </div>
 
 <script>
-  const cardList = document.querySelector('.collections__carousel');
-  const prevButton = document.querySelector('.collections__carousel-control-prev');
-  const nextButton = document.querySelector('.collections__carousel-control-next');
-  const cardWidth = document.querySelector('.collection__card').offsetWidth;
+  function setupCollectionsCarousel() {
+    const cardList = document.querySelector('.collections__carousel');
+    const prevButton = document.querySelector('.collections__carousel-control-prev');
+    const nextButton = document.querySelector('.collections__carousel-control-next');
+    const cardWidth = document.querySelector('.collection__card').offsetWidth;
 
-  prevButton.addEventListener('click', () => {
-    cardList.scrollLeft -= cardWidth;
-  });
+    prevButton.addEventListener('click', () => {
+      cardList.scrollLeft -= cardWidth;
+    });
 
-  nextButton.addEventListener('click', () => {
-    cardList.scrollLeft += cardWidth;
-  });
+    nextButton.addEventListener('click', () => {
+      cardList.scrollLeft += cardWidth;
+    });
 
-  function scrollToLeftOnTabletView(matchMedia) {
-    if (matchMedia.matches) {
-      cardList.scrollLeft += cardWidth / 2;
+    // Do some scroll on tablet and above
+    function scrollToLeftOnTabletView(matchMedia) {
+      if (matchMedia.matches) {
+        cardList.scrollLeft += cardWidth / 2;
+      }
     }
+
+    scrollToLeftOnTabletView(mediaQueries.tablet);
+    mediaQueries.tablet.addEventListener('change', function (_) {
+      scrollToLeftOnTabletView(mediaQueries.tablet);
+    });
   }
 
-  tabletMatch = window.matchMedia('(min-width: 768px)');
-  scrollToLeftOnTabletView(tabletMatch);
-  tabletMatch.addEventListener('change', function (_) {
-    scrollToLeftOnTabletView(tabletMatch);
-  });
+  document.addEventListener('DOMContentLoaded', setupCollectionsCarousel);
 </script>
 
 {% schema %}
@@ -65,6 +71,12 @@
   "class": "sec-collections",
   "settings": [
     {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Shop by Collection"
+    },
+    {
       "type": "radio",
       "id": "data_source",
       "label": "Data Source",
@@ -73,6 +85,13 @@
         { "value": "blocks", "label": "Blocks" }
       ],
       "default": "my_collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_card",
+      "label": "Animate Card on Hover",
+      "default": true,
+      "info": "When check, the collection image will scale on mouse hover."
     }
   ],
   "blocks": [

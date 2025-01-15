@@ -1,6 +1,18 @@
-<a class="collection__card" href="{{ card_url }}">
+<a
+  class="collection__card {% if card_type == 'mini' %}collection__card--mini{% endif %} {% if animate %}scale-img{% endif %}"
+  href="{{ card_url }}"
+>
   <div class="collection__card-overlay"></div>
-  {{ card_img | image_url: width: card_img.width | image_tag: class: 'collection__card-img' }}
+  {% if card_img != blank %}
+    {{ card_img | image_url: width: card_img.width | image_tag: class: 'collection__card-img' }}
+  {% else %}
+    <img
+      class="collection__card-img"
+      width="564"
+      height="846"
+      src="{{ 'collection-placeholder.png' | asset_img_url: 'master' }}"
+    >
+  {% endif %}
   <div class="collection__card-title">
     <h4>
       {{- card_title -}}

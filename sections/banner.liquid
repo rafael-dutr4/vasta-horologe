@@ -15,19 +15,26 @@
         srcset="{{ 'banner-desktop.png' | asset_img_url: 'master' }}"
       >
     {% endif %}
+
+    {% liquid
+      assign img_classes = 'banner__image '
+      if section.settings.animate_banner
+        assign img_classes = img_classes | append: 'float-img'
+      endif
+    %}
     {% if section.settings.image_mobile != blank %}
       {% assign mobile_img_height = section.settings.image_mobile.width %}
       {{
         section.settings.image_mobile
         | image_url: width: section.settings.image_mobile
-        | image_tag: class: 'banner__image'
+        | image_tag: class: img_classes
       }}
     {% else %}
-      {% assign mobile_img_height = 1053 %}
+      {% assign mobile_img_height = 527 %}
       <img
         width="750"
-        height="1053"
-        class="banner__image"
+        height="527"
+        class="{{ img_classes }}"
         src="{{ 'banner-mobile.png' | asset_img_url: 'master' }}"
       >
     {% endif %}
@@ -64,7 +71,12 @@
       </p>
     </div>
     <div class="banner__row banner__cta-row banner__row--center-mobile">
-      <a href="{{ section.settings.btn_url }}" class="cta-btn">{{ section.settings.btn_text }}</a>
+      <a
+        href="{{ section.settings.btn_url }}"
+        class="cta-btn {% if section.settings.cta_btn_glow %}cta-btn-glow{% endif %}"
+      >
+        {{- section.settings.btn_text -}}
+      </a>
     </div>
   </div>
 </div>
@@ -84,6 +96,12 @@
       "type": "image_picker",
       "id": "image_mobile",
       "label": "Mobile Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_banner",
+      "label": "Banner Animation",
+      "default": true
     },
     {
       "type": "text",
@@ -122,6 +140,12 @@
       "type": "url",
       "id": "btn_url",
       "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_btn_glow",
+      "label": "Button Glow Effect",
+      "default": true
     }
   ]
 }
