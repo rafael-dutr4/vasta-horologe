@@ -2,55 +2,62 @@
 
 <div class="footer__container container light-text">
   <div class="footer__section">
-    <div>
-      <img
-        class="logo"
-        width="302"
-        height="90"
-        src="{{ 'vasta-logo-light.png' | asset_img_url: 'master' }}"
-      >
-    </div>
+    {% render 'logo', type: 'light' %}
 
-    <div class="email-cta">
-      <p class="body-text-3">Enter Your Email To Receive 15% Coupon Immediately</p>
-      <form class="email-cta__form">
-        <input class="email-cta__input" type="text" name="q" placeholder="Enter Email Address">
-        <button class="email-cta__form-button">Give Me 15% OFF</button>
+    <div class="footer__newsletter">
+      <p class="footer-text-title">{{ section.settings.newsletter_text }}</p>
+      <form class="footer__newsletter-form">
+        <input
+          class="footer__newsletter-input"
+          type="text"
+          name="q"
+          placeholder="{{ section.settings.newsletter_input_placeholder }}"
+        >
+        <button class="footer__newsletter-form-btn-submit clickable">
+          {{ section.settings.newsletter_button_text }}
+        </button>
       </form>
     </div>
 
     <div class="popular-collections">
-      <h4>Popular Collections</h4>
-      <div class="collections-cards">
-        <a class="carousel-card">
-          <div class="carousel-overlay"></div>
-          <img
-            class="collection-img"
-            width="564"
-            height="846"
-            src="{{ 'collection-placeholder.png' | asset_img_url: 'master' }}"
-          >
-          <div class="collection-title">
-            <h5>Lorem Ipsum</h5>
-          </div>
-        </a>
+      <h4 class="footer-text-title">{{ section.settings.collections_title }}</h4>
+      <div class="collections__cards">
+        {% if section.settings.collections_source == 'my_collections' %}
+          {% for collection in collections %}
+            {% render 'card',
+              card_url: collection.url,
+              card_img: collection.featured_image,
+              card_title: collection.title,
+              card_type: 'mini'
+            %}
+          {% endfor %}
+        {% else %}
+          {% for block in section.blocks %}
+            {% render 'card',
+              card_url: block.settings.card_url,
+              card_img: block.settings.card_img,
+              card_title: block.settings.card_title,
+              card_type: 'mini'
+            %}
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
     <div class="footer__contact-info">
-      <h4>Get In Contact</h4>
+      <h4 class="footer-text-title ">{{ section.settings.contact_title }}</h4>
       <div class="footer__contact-options caption">
         <div>
           {{ 'phone-icon.svg' | inline_asset_content }}
-          <span>(715) 600-1564</span>
+          <span>{{ section.settings.contact_phone }}</span>
         </div>
         <div>
           {{ 'mail-icon.svg' | inline_asset_content }}
-          <span>info@clenchfitness.com</span>
+          <span>{{ section.settings.contact_mail }}</span>
         </div>
         <div>
           {{ 'address-icon.svg' | inline_asset_content }}
-          <span>New Richmond, WI 54017</span>
+          <span>{{ section.settings.contact_address }}</span>
         </div>
       </div>
     </div>
@@ -58,101 +65,172 @@
 
   <div class="footer__section">
     <div class="footer__navigation">
-      <nav class="footer__navigation-section">
-        <div class="footer__navigation-section-title body-title-4">
-          Information
+      <nav class="footer__navigation-section footer__navigation-section-left">
+        <div class="footer__navigation-section-title clickable footer-text-title">
+          <span>
+            {% if section.settings.first_nav != blank %}
+              {{ section.settings.first_nav.title }}
+            {% else %}
+              Information
+            {% endif %}
+          </span>
           {{ 'arrow-icon.svg' | inline_asset_content }}
         </div>
         <ul class="footer__navigation-links show caption">
-          <li>
-            <a>About Us</a>
-          </li>
-          <li>
-            <a>Blog</a>
-          </li>
-          <li>
-            <a>Lorem Ipsum</a>
-          </li>
-          <li>
-            <a>Lorem Ipsum</a>
-          </li>
+          {% if section.settings.first_nav != blank %}
+            {% for link in section.settings.first_nav.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          {% else %}
+            <li>
+              <a href="#">About Us</a>
+            </li>
+            <li>
+              <a href="#">Blog</a>
+            </li>
+            <li>
+              <a href="#">Lorem Ipsum</a>
+            </li>
+            <li>
+              <a href="#">Lorem Ipsum</a>
+            </li>
+          {% endif %}
         </ul>
       </nav>
       <div class="vertical-divider"></div>
-      <nav class="footer__navigation-section">
-        <div class="footer__navigation-section-title body-title-4">
-          Customer Care
+      <nav class="footer__navigation-section footer__navigation-section-right">
+        <div class="footer__navigation-section-title clickable footer-text-title">
+          <span>
+            {% if section.settings.second_nav != blank %}
+              {{ section.settings.second_nav.title }}
+            {% else %}
+              Customer Care
+            {% endif -%}
+          </span>
           {{ 'arrow-icon.svg' | inline_asset_content }}
         </div>
         <ul class="footer__navigation-links caption">
-          <li>
-            <a>Contact Us</a>
-          </li>
-          <li>
-            <a>Terms of service</a>
-          </li>
-          <li>
-            <a>Privacy Policy</a>
-          </li>
-          <li>
-            <a>Accessibility</a>
-          </li>
+          {% if section.settings.first_nav != blank %}
+            {% for link in section.settings.second_nav.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          {% else %}
+            <li>
+              <a href="#">Contact Us</a>
+            </li>
+            <li>
+              <a href="#">Terms of service</a>
+            </li>
+            <li>
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#">Accessibility</a>
+            </li>
+          {% endif %}
         </ul>
       </nav>
     </div>
     <div class="footer__rights-section">
       <div class="payment-methods">
-        <img
-          class="payment-card"
-          width="60"
-          height="35"
-          src="{{ 'visa-logo.png' | asset_img_url: 'master' }}"
-        >
-        <img
-          class="payment-card"
-          width="60"
-          height="35"
-          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
-        >
-        <img
-          class="payment-card"
-          width="60"
-          height="35"
-          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
-        >
-        <img
-          class="payment-card"
-          width="60"
-          height="35"
-          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
-        >
-        <img
-          class="payment-card"
-          width="60"
-          height="35"
-          src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
-        >
+        {% if section.settings.show_visa_card %}
+          <img
+            class="payment-card"
+            width="60"
+            height="35"
+            src="{{ 'visa-logo.png' | asset_img_url: 'master' }}"
+          >
+        {% endif %}
+        {% if section.settings.show_amex_card %}
+          <img
+            class="payment-card"
+            width="60"
+            height="35"
+            src="{{ 'amex-logo.png' | asset_img_url: 'master' }}"
+          >
+        {% endif %}
+        {% if section.settings.show_discover_card %}
+          <img
+            class="payment-card"
+            width="60"
+            height="35"
+            src="{{ 'discover-logo.png' | asset_img_url: 'master' }}"
+          >
+        {% endif %}
+        {% if section.settings.show_shop_pay_card %}
+          <img
+            class="payment-card"
+            width="60"
+            height="35"
+            src="{{ 'shop-pay-logo.png' | asset_img_url: 'master' }}"
+          >
+        {% endif %}
+        {% if section.settings.show_stripe_card %}
+          <img
+            class="payment-card"
+            width="60"
+            height="35"
+            src="{{ 'stripe-logo.png' | asset_img_url: 'master' }}"
+          >
+        {% endif %}
       </div>
 
       <div class="copyright caption">
-        <p>Copyright © 2023 Clench Fitness. All Right Reserved.</p>
+        <p>{{ section.settings.rights_text }}</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  document.querySelectorAll('.footer__navigation-section-title').forEach((node) => {
-    node.addEventListener('click', (e) => {
-      if (node.nextElementSibling.clientHeight) {
-        node.nextElementSibling.style.height = '0';
-        node.nextElementSibling.style.visibility = 'none';
-      } else {
-        node.nextElementSibling.style.visibility = 'visible';
-        node.nextElementSibling.style.height = node.nextElementSibling.scrollHeight + 'px';
+  function setupNavigations() {
+    function setupFooterNavigation(navigationDirectionClass) {
+      const list = document.querySelector(
+        `.footer__navigation-section-${navigationDirectionClass} .footer__navigation-links`
+      );
+      const svg = document.querySelector(
+        `.footer__navigation-section-${navigationDirectionClass} .footer__navigation-section-title svg`
+      );
+      document
+        .querySelector(`.footer__navigation-section-${navigationDirectionClass}`)
+        .addEventListener('click', function (_) {
+          // Stop animation in desktop version
+          if (mediaQueries.desktop.matches) {
+            return;
+          }
+          // Animate SVG
+          svg.classList.toggle('rotate');
+
+          // Animate List
+          if (list.clientHeight) {
+            list.style.height = '0';
+            list.style.visibility = 'none';
+          } else {
+            list.style.visibility = 'visible';
+            list.style.height = list.scrollHeight + 'px';
+          }
+        });
+    }
+
+    setupFooterNavigation('left');
+    setupFooterNavigation('right');
+
+    // Avoid navigation issues in the theme editor
+    mediaQueries.desktop.addEventListener('change', function (_) {
+      if (mediaQueries.desktop.matches) {
+        document.querySelectorAll('.footer__navigation-links').forEach(function (list) {
+          list.style.visibility = 'visible';
+          list.style.height = 'auto';
+        });
       }
     });
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupNavigations);
 </script>
 
 {% schema %}
@@ -160,6 +238,142 @@
   "name": "Footer",
   "class": "sec-footer",
   "tag": "footer",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter CTA Text",
+      "default": "Enter Your Email To Receive 15% Coupon Immediately"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_input_placeholder",
+      "label": "Newsletter Input Placeholder",
+      "default": "Enter Email Address"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Newsletter Button Text",
+      "default": "Give Me 15% OFF"
+    },
+    {
+      "type": "text",
+      "id": "collections_title",
+      "label": "Collections Section Title",
+      "default": "Popular Collections"
+    },
+    {
+      "type": "select",
+      "id": "collections_source",
+      "label": "Collections Source",
+      "options": [
+        {
+          "value": "my_collections",
+          "label": "My Collections"
+        },
+        {
+          "value": "blocks",
+          "label": "Collections Blocks"
+        }
+      ],
+      "default": "my_collections"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact Section Title",
+      "default": "Get In Contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Contact Phone Number",
+      "default": "+1 (715) 600-1564"
+    },
+    {
+      "type": "text",
+      "id": "contact_mail",
+      "label": "Contact Email Address",
+      "default": "info@clenchfitness.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Contact Address",
+      "default": "New Richmond, WI 54017"
+    },
+    {
+      "type": "link_list",
+      "id": "first_nav",
+      "label": "Left Navigation Links"
+    },
+    {
+      "type": "link_list",
+      "id": "second_nav",
+      "label": "Right Navigation Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_visa_card",
+      "label": "Show Visa Card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_amex_card",
+      "label": "Show Amex Card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discover_card",
+      "label": "Show Discover Card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_pay_card",
+      "label": "Show Shop Pay Card",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stripe_card",
+      "label": "Show Stripe Card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rights_text",
+      "label": "Rights Information",
+      "default": "Copyright © 2023 Clench Fitness. All Right Reserved."
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Collection Title",
+          "default": "Lorem Ipsum"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_img",
+          "label": "Collection Image"
+        },
+        {
+          "type": "url",
+          "id": "card_url",
+          "label": "Collection Link"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
