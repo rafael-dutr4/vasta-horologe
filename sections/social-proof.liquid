@@ -76,7 +76,7 @@
   <div class="social-proof__row social-proof__content-top">
     <div class="social-proof__description">
       <h2>{{ section.settings.title }}</h2>
-      <p class="text-lg leading-8">{{ section.settings.description }}</p>
+      <p class="section-description">{{ section.settings.description }}</p>
     </div>
     <a
       class="social-proof__btn cta-btn {%if section.settings.cta_btn_glow%}cta-btn-glow{% endif %}"
@@ -129,51 +129,56 @@
     {
       "type": "image_picker",
       "id": "image_desktop",
-      "label": "Background Image For Desktop View"
+      "label": "Background Image For Desktop View",
+      "info": "Recommended dimensions: 1440x600"
     },
     {
       "type": "image_picker",
       "id": "image_tablet",
-      "label": "Background Image For Tablet View"
+      "label": "Background Image For Tablet View",
+      "info": "Recommended dimensions: 768x566"
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "Background Image For Mobile View"
+      "label": "Background Image For Mobile View",
+      "info": "Recommended dimensions: 375x585"
     },
     {
       "type": "checkbox",
       "id": "animate_image",
       "label": "Animate Background Image",
-      "default": true
+      "default": true,
+      "info": "When checked, the background image will receive a floating effect."
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Section Title",
+      "label": "Title",
       "default": "Cherised Favorites"
     },
     {
       "type": "textarea",
       "id": "description",
-      "label": "Section Description",
+      "label": "Description",
       "default": "Explore the Harmony of Exceptional Quality and Customer Praise"
     },
     {
       "type": "text",
       "id": "cta_text",
-      "label": "Button Text",
+      "label": "CTA Button Text",
       "default": "View More"
     },
     {
       "type": "url",
       "id": "cta_url",
-      "label": "Button Link"
+      "label": "CTA Button Link"
     },
     {
       "type": "checkbox",
       "id": "cta_btn_glow",
       "label": "Button Glow Effect",
+      "info": "When checked, the button will blink a glow effect.",
       "default": true
     }
   ],
@@ -200,7 +205,7 @@
           "min": 0,
           "max": 5,
           "step": 1,
-          "label": "Review Stars",
+          "label": "Rating",
           "default": 5
         },
         {

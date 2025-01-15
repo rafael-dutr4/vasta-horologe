@@ -33,6 +33,7 @@
   height: 100%;
   box-shadow: 2.4px 2.4px 7.86px 0px #00000033;
   border-radius: 0 0 6px 6px;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
@@ -58,6 +59,7 @@
   object-position: center;
   border-radius: 0 0 6px 6px;
   background-color: var(--gray-soft);
+  transition: all 0.5s ease;
 }
 
 .product__details {

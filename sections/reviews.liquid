@@ -15,17 +15,23 @@
   </div>
 
   <div class="reviews__row reviews__row-cards">
+    {% liquid
+      assign img_classes = 'review__image '
+      if section.settings.animate_product_img
+        assign img_classes = img_classes | append: 'scale-img-2'
+      endif
+    %}
     {% for block in section.blocks %}
       <div class="reviews__card">
         {% if block.settings.image != blank %}
           {{
             block.settings.image
             | image_url: width: block.settings.image.width, height: block.settings.image.height
-            | image_tag: class: 'review__image'
+            | image_tag: class: img_classes
           }}
         {% else %}
           <img
-            class="review__image"
+            class="{{img_classes}}"
             width="953"
             height="1334"
             src="{{ 'persona-placeholder.png' | asset_img_url: 'master'  }}"
@@ -89,13 +95,13 @@
     {
       "type": "text",
       "id": "title",
-      "label": "Section Title",
+      "label": "Title",
       "default": "Real Reviews, Real Experiences"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Section Subtitle",
+      "label": "Subtitle",
       "default": "With 1600+ 5-star reviews"
     },
     {

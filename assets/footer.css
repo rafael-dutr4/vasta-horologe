@@ -274,4 +274,12 @@
     justify-content: end;
     gap: 5px;
   }
+
+  .sec-footer h4 {
+    text-align: start;
+  }
+
+  .collection__card-title h4 {
+    text-align: center;
+  }
 }

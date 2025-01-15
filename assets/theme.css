@@ -106,6 +106,12 @@ h4 {
   text-align: center;
 }
 
+.section-description {
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .body-text-3 {
     font-size: 12px;
@@ -135,6 +141,11 @@ h4 {
     font-size: 24px;
     line-height: 28px;
   }
+
+  .section-description {
+    font-size: 14px;
+    line-height: 14px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -155,6 +166,10 @@ h4 {
   .body-text-5 {
     font-size: 18px;
     line-height: 18px;
+  }
+  .section-description {
+    font-size: 20px;
+    line-height: 20px;
   }
 }
 

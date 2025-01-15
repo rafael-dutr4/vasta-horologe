@@ -1,7 +1,7 @@
 <form class="header__search-form {{extra-classes}}" action="{{routes.search_url}}">
   <input class="header__search-input" type="text" name="q" placeholder="{{ section.settings.input_placeholder }}">
   <button class="header__search-btn-submit clickable" type="submit">
-    <span>{{ section.settings.btn_placeholder }}</span>
+    <span>{{ section.settings.btn_text }}</span>
     {{- 'search-icon.svg' | inline_asset_content -}}
   </button>
 </form>
